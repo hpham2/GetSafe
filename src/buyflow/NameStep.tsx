@@ -18,7 +18,12 @@ const NameStep: React.FC<NameStepProps> = (props) => {
           value={fullName}
         ></input>
       </div>
-      <button onClick={() => props.cb('fullName', fullName)}>Next</button>
+      <button
+        onClick={() => props.cb('fullName', fullName)}
+        disabled={!fullName}
+      >
+        Next
+      </button>
     </>
   )
 }

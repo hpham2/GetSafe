@@ -18,7 +18,9 @@ const EmailStep: React.FC<EmailStepProps> = (props) => {
           value={email}
         ></input>
       </div>
-      <button onClick={() => props.cb('email', email)}>Next</button>
+      <button onClick={() => props.cb('email', email)} disabled={!email}>
+        Next
+      </button>
     </>
   )
 }
