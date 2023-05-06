@@ -26,7 +26,7 @@ const EmailStep: React.FC<EmailStepProps> = ({ path }) => {
         onClick={() => setSummaryData({ ...summaryData, email })}
         disabled={!email}
       >
-        <Link to={`${path}/age`}>Next</Link>
+        {email ? <Link to={`${path}/age`}>Next</Link> : <span>Next</span>}
       </button>
     </>
   )

@@ -26,7 +26,11 @@ const NameStep: React.FC<NameStepProps> = ({ path }) => {
         onClick={() => setSummaryData({ ...summaryData, fullName })}
         disabled={!fullName}
       >
-        <Link to={`${path}/summary`}>Next</Link>
+        {fullName ? (
+          <Link to={`${path}/summary`}>Next</Link>
+        ) : (
+          <span>Next</span>
+        )}
       </button>
     </>
   )

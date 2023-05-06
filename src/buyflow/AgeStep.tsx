@@ -26,7 +26,11 @@ const AgeStep: React.FC<AgeStepProps> = ({ path }) => {
         onClick={() => setSummaryData({ ...summaryData, age })}
         disabled={age <= 0}
       >
-        <Link to={`${path}/fullname`}>Next</Link>
+        {age > 0 ? (
+          <Link to={`${path}/fullname`}>Next</Link>
+        ) : (
+          <span>Next</span>
+        )}
       </button>
     </>
   )
