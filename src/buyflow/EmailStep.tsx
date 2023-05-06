@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BuyFlowContext } from '../context/BuyFlowContext'
 
 interface EmailStepProps {
   path: string
@@ -7,6 +8,7 @@ interface EmailStepProps {
 
 const EmailStep: React.FC<EmailStepProps> = ({ path }) => {
   const [email, setEmail] = useState('')
+  const { summaryData, setSummaryData } = useContext(BuyFlowContext)
 
   return (
     <>
@@ -20,7 +22,10 @@ const EmailStep: React.FC<EmailStepProps> = ({ path }) => {
           value={email}
         ></input>
       </div>
-      <button onClick={() => {}} disabled={!email}>
+      <button
+        onClick={() => setSummaryData({ ...summaryData, email })}
+        disabled={!email}
+      >
         <Link to={`${path}/age`}>Next</Link>
       </button>
     </>

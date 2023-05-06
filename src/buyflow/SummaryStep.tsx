@@ -1,20 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { BuyFlowContext } from '../context/BuyFlowContext'
 
-interface SummaryStepProps {
-  collectedData: {
-    email: string
-    age: number
-    fullName: string
-  }
-}
+const SummaryStep = () => {
+  const { summaryData } = useContext(BuyFlowContext)
 
-const SummaryStep: React.FC<SummaryStepProps> = (props) => {
   return (
     <>
-      <div>Email: {props.collectedData.email}</div>
-      <div>Age: {props.collectedData.age}</div>
-      <div>FullName: {props.collectedData.fullName}</div>
+      <div>Email: {summaryData.email}</div>
+      <div>Age: {summaryData.age}</div>
+      <div>FullName: {summaryData.fullName}</div>
       <div>
         <Link to="/purchased=dev_ins">Purchase</Link>
       </div>

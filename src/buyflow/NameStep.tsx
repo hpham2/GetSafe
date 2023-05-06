@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BuyFlowContext } from '../context/BuyFlowContext'
 
 interface NameStepProps {
   path: string
@@ -7,6 +8,7 @@ interface NameStepProps {
 
 const NameStep: React.FC<NameStepProps> = ({ path }) => {
   const [fullName, setFullName] = useState('')
+  const { summaryData, setSummaryData } = useContext(BuyFlowContext)
 
   return (
     <>
@@ -20,7 +22,10 @@ const NameStep: React.FC<NameStepProps> = ({ path }) => {
           value={fullName}
         ></input>
       </div>
-      <button onClick={() => {}} disabled={!fullName}>
+      <button
+        onClick={() => setSummaryData({ ...summaryData, fullName })}
+        disabled={!fullName}
+      >
         <Link to={`${path}/summary`}>Next</Link>
       </button>
     </>

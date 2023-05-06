@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AgeStep from './AgeStep'
 import EmailStep from './EmailStep'
 import SummaryStep from './SummaryStep'
 import NameStep from './NameStep'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { BuyFlowStateProvider } from '../context/BuyFlowContext'
 
 interface BuyflowProps {
   productId: ProductIds
@@ -18,32 +19,28 @@ const PRODUCT_IDS_TO_NAMES = {
 }
 
 const Buyflow: React.FC<BuyflowProps> = (props) => {
-  const [collectedData] = useState({
-    email: '',
-    age: 0,
-    fullName: '',
-  })
-
   const { path } = useRouteMatch()
 
   return (
     <>
       <h4>Buying {PRODUCT_IDS_TO_NAMES[props.productId]}</h4>
 
-      <Switch>
-        <Route exact path={path}>
-          <EmailStep path={path} />
-        </Route>
-        <Route path={`${path}/age`}>
-          <AgeStep path={path} />
-        </Route>
-        <Route path={`${path}/fullname`}>
-          <NameStep path={path} />
-        </Route>
-        <Route path={`${path}/summary`}>
-          <SummaryStep collectedData={collectedData} />
-        </Route>
-      </Switch>
+      <BuyFlowStateProvider>
+        <Switch>
+          <Route exact path={path}>
+            <EmailStep path={path} />
+          </Route>
+          <Route path={`${path}/age`}>
+            <AgeStep path={path} />
+          </Route>
+          <Route path={`${path}/fullname`}>
+            <NameStep path={path} />
+          </Route>
+          <Route path={`${path}/summary`}>
+            <SummaryStep />
+          </Route>
+        </Switch>
+      </BuyFlowStateProvider>
     </>
   )
 }

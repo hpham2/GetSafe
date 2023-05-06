@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BuyFlowContext } from '../context/BuyFlowContext'
 
 interface AgeStepProps {
   path: string
@@ -7,6 +8,7 @@ interface AgeStepProps {
 
 const AgeStep: React.FC<AgeStepProps> = ({ path }) => {
   const [age, setAge] = useState(0)
+  const { summaryData, setSummaryData } = useContext(BuyFlowContext)
 
   return (
     <>
@@ -20,7 +22,10 @@ const AgeStep: React.FC<AgeStepProps> = ({ path }) => {
           value={age}
         ></input>
       </div>
-      <button onClick={() => {}} disabled={age <= 0}>
+      <button
+        onClick={() => setSummaryData({ ...summaryData, age })}
+        disabled={age <= 0}
+      >
         <Link to={`${path}/fullname`}>Next</Link>
       </button>
     </>
