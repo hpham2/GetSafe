@@ -1,38 +1,31 @@
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useCallback, useContext } from 'react'
 import { BuyFlowContext } from '../context/BuyFlowContext'
+import BaseStep from './component/BaseStep'
+import { useHistory } from 'react-router-dom'
 
 interface NameStepProps {
   path: string
 }
 
 const NameStep: React.FC<NameStepProps> = ({ path }) => {
-  const [fullName, setFullName] = useState('')
   const { summaryData, setSummaryData } = useContext(BuyFlowContext)
+  const history = useHistory()
+
+  const handleClick = useCallback(
+    (fullName: unknown) => {
+      if (typeof fullName === 'string') {
+        setSummaryData({ ...summaryData, fullName })
+        history.push(`${path}/age`)
+      } else
+        throw new Error(
+          'This case should never be happened. Invalid value type!'
+        )
+    },
+    [history, path, setSummaryData, summaryData]
+  )
 
   return (
-    <>
-      <div>
-        Fullname (Firstname, LastName):{' '}
-        <input
-          type="email"
-          onChange={({ target: { value } }) => {
-            setFullName(value)
-          }}
-          value={fullName}
-        ></input>
-      </div>
-      <button
-        onClick={() => setSummaryData({ ...summaryData, fullName })}
-        disabled={!fullName}
-      >
-        {fullName ? (
-          <Link to={`${path}/summary`}>Next</Link>
-        ) : (
-          <span>Next</span>
-        )}
-      </button>
-    </>
+    <BaseStep stepName={'Fullname'} stepType={'text'} onClick={handleClick} />
   )
 }
 
