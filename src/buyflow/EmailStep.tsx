@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 interface EmailStepProps {
-  cb: (field: string, value: string) => void
+  path: string
 }
 
-const EmailStep: React.FC<EmailStepProps> = (props) => {
+const EmailStep: React.FC<EmailStepProps> = ({ path }) => {
   const [email, setEmail] = useState('')
+
   return (
     <>
       <div>
@@ -18,8 +20,8 @@ const EmailStep: React.FC<EmailStepProps> = (props) => {
           value={email}
         ></input>
       </div>
-      <button onClick={() => props.cb('email', email)} disabled={!email}>
-        Next
+      <button onClick={() => {}} disabled={!email}>
+        <Link to={`${path}/age`}>Next</Link>
       </button>
     </>
   )

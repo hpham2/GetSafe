@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 interface NameStepProps {
-  cb: (field: string, value: string) => void
+  path: string
 }
 
-const NameStep: React.FC<NameStepProps> = (props) => {
+const NameStep: React.FC<NameStepProps> = ({ path }) => {
   const [fullName, setFullName] = useState('')
+
   return (
     <>
       <div>
@@ -18,11 +20,8 @@ const NameStep: React.FC<NameStepProps> = (props) => {
           value={fullName}
         ></input>
       </div>
-      <button
-        onClick={() => props.cb('fullName', fullName)}
-        disabled={!fullName}
-      >
-        Next
+      <button onClick={() => {}} disabled={!fullName}>
+        <Link to={`${path}/summary`}>Next</Link>
       </button>
     </>
   )

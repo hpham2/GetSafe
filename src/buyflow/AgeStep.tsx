@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 interface AgeStepProps {
-  cb: (field: string, value: number) => void
+  path: string
 }
 
-const AgeStep: React.FC<AgeStepProps> = (props) => {
+const AgeStep: React.FC<AgeStepProps> = ({ path }) => {
   const [age, setAge] = useState(0)
+
   return (
     <>
       <div>
@@ -18,8 +20,8 @@ const AgeStep: React.FC<AgeStepProps> = (props) => {
           value={age}
         ></input>
       </div>
-      <button onClick={() => props.cb('age', age)} disabled={age <= 0}>
-        Next
+      <button onClick={() => {}} disabled={age <= 0}>
+        <Link to={`${path}/fullname`}>Next</Link>
       </button>
     </>
   )
