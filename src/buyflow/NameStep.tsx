@@ -15,7 +15,7 @@ const NameStep: React.FC<NameStepProps> = ({ path }) => {
     (fullName: unknown) => {
       if (typeof fullName === 'string') {
         setSummaryData({ ...summaryData, fullName })
-        history.push(`${path}/age`)
+        history.push(`${path}/summary`)
       } else
         throw new Error(
           'This case should never be happened. Invalid value type!'
